@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Expenses";
+}
+
+@model List<Expense>
+
+<div class="text-center">
+    <h1 class="display-4">Expenses</h1>
+    <br />
+    <hr />
+    <h3>Total Expenses $@ViewBag.Expenses</h3>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                  Id
+                </th>
+                <th>
+                  Value
+                </th>
+                <th>
+                  Description
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach(var expense in Model)
+                {
+                    //inside each row we create per expense entry we want table data 
+                    //added asp actions to edit and delete entrys from our table 
+                    //the asp-route-id = @expense lets us know what expense we are deleteing or editing based on its ID
+                    <tr>
+                      <td>
+                         @expense.Id
+                      </td>
+                      <td>
+                         @expense.Value
+                      </td>
+                      <td>
+                         @expense.Description
+                      </td>
+                      <td>
+                           <a asp-action="CreateEditExpense"asp-route-id="@expense.Id">Edit</a>
+                           <a asp-action="DeleteExpense" asp-route-id="@expense.Id">Delete</a> 
+                      </td>
+                    </tr>
+                }
+          }
+        </tbody>
+    </table>
+</div>
+
+
